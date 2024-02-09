@@ -28,3 +28,11 @@ def update_counter(name):
     app.logger.info(f"Request to update counter: {name}")
     COUNTERS[name] = COUNTERS[name]+1
     return {name: COUNTERS[name]}, status.HTTP_200_OK
+
+
+@app.route('/counters/<name>', methods=['DELETE'])
+def delete_counter(name):
+    """Delete a counter"""
+    app.logger.info(f"Request to delete counter: {name}")
+    del COUNTERS[name]
+    return {name: name}, status.HTTP_204_NO_CONTENT
