@@ -46,3 +46,11 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_200_OK)
         self.assertGreater(result.json['update'], test_counter)
         
+    
+    def test_delete_a_counter(self):
+        """Tests deleting counters of specific names"""
+        result = self.client.post('/counters/bar')
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+        result = self.client.delete('/counters/bar')
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+        
